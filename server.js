@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const api = require('./routes/index.js');
 const html = require("./routes/html.js")
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 
 app.use(express.static('public'));
