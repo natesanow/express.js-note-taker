@@ -1,6 +1,6 @@
 const notes = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
-const { readAndAppend, readFromFile } = require('../helpers/fsutils');
+const { readAndAppend, readFromFile,writeToFile } = require('../helpers/fsutils');
 
 // GET Route for retrieving all the feedback
 notes.get('/', (req, res) =>
@@ -16,7 +16,7 @@ notes.post('/', (req, res) => {
     const newNote = {
         title,
         text,
-        notes_id: uuidv4(),
+        id: uuidv4(),
     };
 
     readAndAppend(newNote, './db/db.json');
@@ -31,5 +31,21 @@ notes.post('/', (req, res) => {
     res.json('Error in posting notes');
   }
 });
+
+notes.delete('/:id',(req,res) => {
+  readFromFile('./db/db.json').then((data) =>{
+    let db = JSON.parse(data)
+    console.log(db,"Delete",req.params.id)
+    let dbList = []
+    for(let i=0;i<db.length;i++){
+      if(db[i].id !== req.params.id){
+        dbList.push(db[i])
+      }
+    }
+    console.log(dbList)
+    writeToFile('./db/db.json', dbList)
+    res.json(dbList)
+  })
+})
 
 module.exports = notes
