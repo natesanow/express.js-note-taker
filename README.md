@@ -13,6 +13,7 @@ In this project challenge I created a Note Taker application that can be used to
 
 ## Screenshot
 
+![Note-Taker-Screenshot](https://github.com/natesanow/express.js-note-taker/assets/152323081/e68793c5-6606-48cf-917a-1678570aa038)
 
 
 ## Links to Github and deployed Heroku Application
